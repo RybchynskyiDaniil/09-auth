@@ -19,7 +19,7 @@ function NoteDetailsClient() {
     refetchOnMount: false,
   });
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <LoaderEl />;
 
   if (error || !note) return <p>Something went wrong.</p>;
 
