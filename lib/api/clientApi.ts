@@ -58,7 +58,7 @@ export async function fetchNoteById(
   return response.data;
 }
 
-interface AuthProps{
+export interface AuthProps{
     email: string;
     password: string;
 
@@ -66,11 +66,12 @@ interface AuthProps{
 
 
 
-export async function register(body:AuthProps) {
-  const response = await api.post<User>(`/auth/register`, body);
-
+export const register = async (
+  data:AuthProps
+): Promise<User> => {
+  const response = await api.post<User>("/auth/register", data);
   return response.data;
-}
+};
 
 export async function login (body:AuthProps) {
   const response = await api.post<User>(`/auth/login`, body);
