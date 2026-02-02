@@ -1,15 +1,15 @@
 "use client";
-import css from "./SignUpPage.module.css";
+import css from "./page.module.css";
 import { useState } from "react";
+import { AuthProps } from "../../../lib/api/clientApi";
+import { login } from "../../../lib/api/clientApi";
 import { useRouter } from "next/navigation";
-import { AuthProps, register } from "../../../lib/api/clientApi";
 import { useAuthStore } from "../../../lib/store/authStore";
 
-export default function SignUp() {
-  const router = useRouter();
-  const [error, setError] = useState("");
+export default function SignIn() {
   const setUser = useAuthStore((state) => state.setUser);
-
+  const [error, setError] = useState("");
+  const router = useRouter();
   const handleSubmit = async (formData: FormData) => {
     try {
       const email = formData.get("email");
@@ -21,22 +21,22 @@ export default function SignUp() {
         email,
         password,
       };
-      const response = await register(values);
+      const response = await login(values);
       if (response) {
         setUser(response);
         router.push("/profile");
       } else {
         setError("Invalid email or password");
       }
-    } catch (e) {
+    } catch (error) {
       setError("Registration failed");
     }
   };
-
   return (
     <main className={css.mainContent}>
-      <h1 className={css.formTitle}>Sign up</h1>
       <form className={css.form} action={handleSubmit}>
+        <h1 className={css.formTitle}>Sign in</h1>
+
         <div className={css.formGroup}>
           <label htmlFor="email">Email</label>
           <input
@@ -61,7 +61,7 @@ export default function SignUp() {
 
         <div className={css.actions}>
           <button type="submit" className={css.submitButton}>
-            Register
+            Log in
           </button>
         </div>
 

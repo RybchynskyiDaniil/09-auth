@@ -1,7 +1,7 @@
 import css from "./loading.module.css";
 
-const Loading = () => {
+const LoaderEl = () => {
   return <div className={css.loader}></div>;
 };
 
-export default Loading;
+export default LoaderEl;

@@ -93,12 +93,17 @@ export const checkSession = async () => {
 };
 
 export const getMe = async () => {
-  const { data } = await api.get<User>('/auth/me');
+  const { data } = await api.get<User>('/users/me');
   return data;
 };
 
-export const updateMe = async (body:AuthProps) => {
-  const { data } = await api.patch<User>('/auth/me', body);
+export interface UpdateProps {
+  username: string;
+  email: string;
+}
+
+export const updateMe = async (body:UpdateProps) => {
+  const { data } = await api.patch<User>('/users/me', body);
   return data;
 };
 

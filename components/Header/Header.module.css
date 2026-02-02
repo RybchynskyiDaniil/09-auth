@@ -19,19 +19,31 @@
 }
 
 .navigation {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
     display: flex;
-    gap: 1rem;
+        /* Включаем флекс-контейнер */
+        gap: 1rem;
+        /* Расстояние между элементами */
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        /* Убираем маркеры */
+        align-items: center;
 }
 
 .navigation li a {
-    text-decoration: none;
-    color: white;
-    font-size: 1rem;
+text-decoration: none;
+    /* Убираем подчеркивание */
+    color: #fff;
+    /* Цвет ссылок */
+    padding: 0.5rem 1rem;
+    /* Внутренние отступы для кликабельности */
+    display: block;
 }
 
 .navigation li a:hover {
     color: #ddd;
+}
+.Header-module__navigation li {
+    margin: 0;
+    /* Убираем внешние отступы */
 }
