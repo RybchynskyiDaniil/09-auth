@@ -13,10 +13,12 @@ export default async function Profile() {
   const user = await getMeServer();
 
   return (
-    <div>
-      <h1>Profile Page</h1>
+    <div className={css.container}>
+      <h1 className={css.title}>Profile Page</h1>
 
-      <Link href="/profile/edit">Edit Profile</Link>
+      <Link href="/profile/edit" className={css.editProfileButton}>
+        Edit Profile
+      </Link>
 
       <Image
         src={user.avatar}
@@ -26,8 +28,8 @@ export default async function Profile() {
         className={css.avatar}
       />
 
-      <p>Username: {user.username}</p>
-      <p>Email: {user.email}</p>
+      <p className={css.username}>Username: {user.username}</p>
+      <p className={css.email}>Email: {user.email}</p>
     </div>
   );
 }

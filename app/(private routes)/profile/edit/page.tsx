@@ -28,13 +28,11 @@ export default function EditPage() {
         setLoading(false);
       }
     };
-
     fetchUser();
   }, []);
 
   const handleSaveUser = async (e: React.FormEvent) => {
     e.preventDefault();
-
     const updatedUser = await updateMe({ username });
     setUser(updatedUser);
     router.push("/profile");
@@ -44,21 +42,39 @@ export default function EditPage() {
 
   return (
     <form onSubmit={handleSaveUser} className={css.form}>
-      <h1>Edit Profile</h1>
+      <h1 className={css.title}>Edit Profile</h1>
 
-      <Image src={avatar} alt="User avatar" width={120} height={120} />
+      <Image
+        src={avatar}
+        alt="User avatar"
+        width={120}
+        height={120}
+        className={css.avatar}
+      />
 
-      <label>
+      <label className={css.label}>
         Username:
-        <input value={username} onChange={(e) => setUsername(e.target.value)} />
+        <input
+          value={username}
+          className={css.input}
+          onChange={(e) => setUsername(e.target.value)}
+        />
       </label>
 
-      <p>Email: {email}</p>
+      <p className={css.email}>Email: {email}</p>
 
-      <button type="submit">Save</button>
-      <button type="button" onClick={() => router.push("/profile")}>
-        Cancel
-      </button>
+      <div className={css.buttons}>
+        <button type="submit" className={css.saveButton}>
+          Save
+        </button>
+        <button
+          type="button"
+          className={css.cancelButton}
+          onClick={() => router.push("/profile")}
+        >
+          Cancel
+        </button>
+      </div>
     </form>
   );
 }

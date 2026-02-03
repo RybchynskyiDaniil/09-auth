@@ -1,55 +1,36 @@
-.mainContent {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 32px;
-}
-
-.profileCard {
+.form {
     max-width: 500px;
-    width: 100%;
-    background-color: #ffffff;
+    margin: 0 auto;
+    padding: 24px;
+    background: #fff;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    padding: 24px;
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
-.formTitle {
+.title {
     font-size: 32px;
     font-weight: 700;
     color: #1a1a1a;
-    margin-bottom: 24px;
-    text-align: left;
+    text-align: center;
+    margin-bottom: 16px;
 }
 
 .avatar {
     border-radius: 50%;
     object-fit: cover;
     display: block;
-    margin: 0 auto 24px auto;
+    margin: 0 auto 16px auto;
 }
 
-.profileInfo {
-    font-size: 18px;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: flex-start;
-}
-
-.usernameWrapper {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.usernameWrapper label {
+.label {
     font-weight: 600;
-    margin-bottom: 8px;
     color: #222;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .input {
@@ -66,9 +47,17 @@
     outline: none;
 }
 
-.profileInfo p {
-    margin: 0;
+.email {
+    font-size: 16px;
     font-weight: 500;
+    color: #333;
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 12px;
 }
 
 .saveButton {
@@ -81,8 +70,6 @@
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    align-self: stretch;
-    text-align: center;
 }
 
 .saveButton:hover {
@@ -103,10 +90,4 @@
 .cancelButton:hover {
     background-color: #6c757d;
     color: white;
-}
-
-.actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 20px;
 }
