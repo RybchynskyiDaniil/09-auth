@@ -99,7 +99,7 @@ export const getMe = async () => {
 
 export interface UpdateProps {
   username: string;
-  email: string;
+  email?: string;
 }
 
 export const updateMe = async (body:UpdateProps) => {

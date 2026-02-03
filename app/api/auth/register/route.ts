@@ -8,31 +8,39 @@ import { logErrorResponse } from '../../_utils/utils';
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-
     const apiRes = await api.post('auth/register', body);
 
     const cookieStore = await cookies();
     const setCookie = apiRes.headers['set-cookie'];
 
-    if (setCookie) {
-      const cookieArray = Array.isArray(setCookie) ? setCookie : [setCookie];
+    if (!setCookie) {
+      return NextResponse.json(
+        { message: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
 
-      for (const cookieStr of cookieArray) {
-        const parsed = parse(cookieStr);
+    const cookieArray = Array.isArray(setCookie) ? setCookie : [setCookie];
 
-        const options = {
-          path: parsed.Path,
-          maxAge: parsed['Max-Age'] ? Number(parsed['Max-Age']) : undefined,
-          expires: parsed.Expires ? new Date(parsed.Expires) : undefined,
-        };
+    for (const cookieStr of cookieArray) {
+      const parsed = parse(cookieStr);
 
-        if (parsed.accessToken) {
-          cookieStore.set('accessToken', parsed.accessToken, options);
-        }
+      const options = {
+        path: parsed.Path,
+        maxAge: parsed['Max-Age']
+          ? Number(parsed['Max-Age'])
+          : undefined,
+        expires: parsed.Expires
+          ? new Date(parsed.Expires)
+          : undefined,
+      };
 
-        if (parsed.refreshToken) {
-          cookieStore.set('refreshToken', parsed.refreshToken, options);
-        }
+      if (parsed.accessToken) {
+        cookieStore.set('accessToken', parsed.accessToken, options);
+      }
+
+      if (parsed.refreshToken) {
+        cookieStore.set('refreshToken', parsed.refreshToken, options);
       }
     }
 
@@ -42,22 +50,15 @@ export async function POST(req: NextRequest) {
       logErrorResponse(error.response?.data);
 
       return NextResponse.json(
-        {
-          error:
-            error.response?.data?.message ??
-            error.response?.data?.error ??
-            'Registration failed',
-        },
-        {
-          status: error.response?.status ?? 500,
-        }
+        error.response?.data,
+        { status: error.status }
       );
     }
 
     logErrorResponse({ message: (error as Error).message });
 
     return NextResponse.json(
-      { error: 'Internal Server Error' },
+      { message: 'Internal Server Error' },
       { status: 500 }
     );
   }
