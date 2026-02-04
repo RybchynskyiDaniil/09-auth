@@ -79,9 +79,10 @@ export async function login (body:AuthProps) {
   return response.data;
 }
 
-export async function logout ():Promise<void> {
- await api.post<User>(`/auth/logout`);
+export async function logout(): Promise<void> {
+  await api.post('/auth/logout');
 }
+
 
 type CheckSessionRequest = {
   success: boolean;
